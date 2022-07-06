@@ -30,15 +30,13 @@ export const Number = styled.div`
     text-align:center;
     border-radius:50%;
     color:#FFF;
-    background:#4e4e95;
+    background:#5b5fc7;
     margin-right:10px;
 `
 export const SettingMenu = styled.div`
 
 `
 export const Icon = styled.div`
-    width:20px;
-    height:20px;
     margin-right:10px;
     padding:10px;
 `
@@ -58,10 +56,14 @@ export const AddNavigationBlock = styled.div`
 export const AddItem = styled.div`
     display:flex;
     align-items:center;
-    width:400px;
+    width:450px;
     justify-content:space-between;
     margin-bottom:2rem;
-
+    .ui-icon{
+        position:relative;
+        right:10px;
+        top:1px;
+    }
 `
 export const Input = styled.input`
     width:300px;
@@ -90,7 +92,7 @@ export const SaveBlock = styled.div`
     position:absolute;
     bottom:2rem;
     right:2rem;
-    width:170px;
+    width:200px;
     display:flex;
     justify-content:space-between;
 `

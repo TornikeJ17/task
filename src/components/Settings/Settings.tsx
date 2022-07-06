@@ -1,3 +1,4 @@
+import React, {useEffect} from 'react'
 import {
     Container,
     BlockOne,
@@ -9,24 +10,31 @@ import {
     MenuItem,
     AddNavigationBlock,
     AddItem,
-    Button,
     SearchBar,
     Input,
     SaveBlock
 } from './Styled'
 import { ComposeIcon, SearchIcon, AddIcon } from '@fluentui/react-icons-northstar'
-import { Tree } from '@fluentui/react-northstar'
+import { Tree,Button,Flex } from '@fluentui/react-northstar'
 import {Data} from '../store/interfaces'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 interface props {
-    data: string,
-    setData: React.Dispatch<React.SetStateAction<string>>;
+    title: string;
+    setData: React.Dispatch<React.SetStateAction<Array<Data>>>;
+    setTitle: React.Dispatch<React.SetStateAction<string>>;
+    handleAdd: (e: React.FormEvent) => void;
 }
-const Settings: React.FC<props> = ({ data,setData }) => {
-    const SaveData = () => {
-        localStorage.setItem('saveData', JSON.stringify(data))
-    }
+const Settings: React.FC<props> = ({ handleAdd,title,setTitle,setData }) => {
+   
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const storage = localStorage.getItem("Data")
+            if (storage) {
+                setData(JSON.parse(storage))
+            }
+        }
+    },[])
     const items = [
         {
           id: 'item-1',
@@ -120,50 +128,34 @@ const Settings: React.FC<props> = ({ data,setData }) => {
                 </SettingMenu>
             </BlockOne>
             <BlockTwo>
+                <form onSubmit={handleAdd}>
                 <Title>Configure Navigation</Title>
                 <div>The Mega Menu can be configured here</div>
                 <Title>Add navigation entries</Title>
                 <div>Here's an example of how a section can be used to group inputs</div>
                 <AddNavigationBlock>
                     <AddItem>
-                        <Button>
-                            <span style={{width:10}}><AddIcon /></span>
+                        <Button primary>
+                                <AddIcon size="small"/>
                             Add entry
                         </Button>
                         <SearchBar>
                             <Input
                                 type="search"
                                 placeholder="Search for a navigation entry"
-                                onChange={(e) => setData(e.target.value)}
+                                onChange={(e) => setTitle(e.target.value)}
                             />
-                            <Icon style={{position: "absolute",right:-10}}><SearchIcon /></Icon>
+                            <Icon style={{position: "absolute",right:-15, top:-8}}><SearchIcon /></Icon>
                         </SearchBar>
                     </AddItem>
                     <Tree aria-label="Custom title" items={items} />
                    
                     <SaveBlock>
-                    <button style={{
-                        width: 100,
-                        padding: 5,
-                        background: "#FFF",
-                        border: "1px solid  #ddd",
-                        borderRadius: 5,
-                        cursor:'pointer'
-
-                    }}>Discard</button>
-                    <button style={{
-                        width: 50,
-                        padding: 5,
-                        color: '#FFF',
-                        background: '#4e4e95',
-                        border: 'none',
-                        borderRadius: 5,
-                        cursor:'pointer'
-                        }}
-                            onClick={SaveData}
-                        >Save</button>
+                        <Button content="Discard" secondary />
+                        <Button type="submit" content="Save" primary />
                    </SaveBlock>
                 </AddNavigationBlock>
+                </form>
                 
             </BlockTwo>
         </Container>

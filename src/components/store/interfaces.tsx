@@ -1,5 +1,4 @@
 export interface Data {
-    label: string,
+    title: string,
     id: number,
-    item:[]
 }

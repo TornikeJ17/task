@@ -1,312 +1,16 @@
-import React,{useState,useRef} from 'react';
+import React,{useState,useEffect} from 'react';
 import { Container, LinkItems, Icon,DropdownMenu,SubMenu,BlockOne,BlockTwo,ItemBlock,Items } from './Styled'
 import { MenuIcon,MoreIcon } from '@fluentui/react-icons-northstar'
 import { Link } from 'react-router-dom'
 import { Data } from "../store/interfaces"
-
+import {Dummy} from '../store/Dummy'
 interface props {
-    data: string,
+    data:Array<Data>
 }
 const Navbar: React.FC<props> = ({data}) => {
     const [show, setShow] = useState(false)
     const [selectItem, setSelectItem] = useState(1)
-    const subMenu = [
-        {
-            label: 'Sub Menu Item 1',
-            id:1,
-            items: [
-                {
-                    optionItem:'My Career and Benefits',
-                    items: [
-                        {
-                            title:'Item 1'
-                        },
-                        {
-                            title:'Item 2'
-                        },
-                        {
-                            title:'Item 3'
-                        },
-                        {
-                            title:'Item 4'
-                        },
-                        {
-                            title:'Item 5'
-                        },
-                        {
-                            title:'Item 6'
-                        }
-                    ]
-                },
-                {
-                    optionItem:'My Career and Benefits',
-                    items: [
-                        {
-                            title:'Item 1'
-                        },
-                        {
-                            title:'Item 2'
-                        },
-                        {
-                            title:'Item 3'
-                        },
-                        {
-                            title:'Item 4'
-                        },
-                        {
-                            title:'Item 5'
-                        },
-                        {
-                            title:'Item 6'
-                        }
-                    ]
-                },
-                {
-                    optionItem: 'Traven and Expense',
-                    items: [
-                        {
-                            title:'Item 1'
-                        },
-                        {
-                            title:'Item 2'
-                        },
-                        {
-                            title:'Item 3'
-                        },
-                        {
-                            title:'Item 4'
-                        },
-                        {
-                            title:'Item 5'
-                        },
-                        {
-                            title:'Item 6'
-                        }
-                    ]
-                },
-                {
-                    optionItem: 'Traven and Expense',
-                    items: [
-                        {
-                            title:'Item 1'
-                        },
-                        {
-                            title:'Item 2'
-                        },
-                        {
-                            title:'Item 3'
-                        },
-                        {
-                            title:'Item 4'
-                        },
-                        {
-                            title:'Item 5'
-                        },
-                        {
-                            title:'Item 6'
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            label: 'Sub Menu Item 2',
-            id:2,
-            items: [
-                {
-                    optionItem:'My Career and Benefits',
-                    items: [
-                        {
-                            title:'Item 1'
-                        },
-                        {
-                            title:'Item 2'
-                        },
-                        {
-                            title:'Item 3'
-                        },
-                        {
-                            title:'Item 4'
-                        },
-                        {
-                            title:'Item 5'
-                        },
-                        {
-                            title:'Item 6'
-                        }
-                    ]
-                },
-                {
-                    optionItem:'My Career and Benefits',
-                    items: [
-                        {
-                            title:'Item 1'
-                        },
-                        {
-                            title:'Item 2'
-                        },
-                        {
-                            title:'Item 3'
-                        },
-                        {
-                            title:'Item 4'
-                        },
-                        {
-                            title:'Item 5'
-                        },
-                        {
-                            title:'Item 7'
-                        }
-                    ]
-                },
-                {
-                    optionItem: 'Traven and Expense',
-                    items: [
-                        {
-                            title:'Item 1'
-                        },
-                        {
-                            title:'Item 2'
-                        },
-                        {
-                            title:'Item 3'
-                        },
-                        {
-                            title:'Item 4'
-                        },
-                        {
-                            title:'Item 5'
-                        },
-                        {
-                            title:'Item 6'
-                        }
-                    ]
-                },
-                {
-                    optionItem: 'Traven and Expense',
-                    items: [
-                        {
-                            title:'Item 1'
-                        },
-                        {
-                            title:'Item 2'
-                        },
-                        {
-                            title:'Item 3'
-                        },
-                        {
-                            title:'Item 4'
-                        },
-                        {
-                            title:'Item 5'
-                        },
-                        {
-                            title:'Item 6'
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            label: 'Sub Menu Item 3',
-            id:3,
-            items: [
-                {
-                    optionItem:'My Career and Benefits',
-                    items: [
-                        {
-                            title:'Item 1'
-                        },
-                        {
-                            title:'Item 2'
-                        },
-                        {
-                            title:'Item 3'
-                        },
-                        {
-                            title:'Item 4'
-                        },
-                        {
-                            title:'Item 5'
-                        },
-                        {
-                            title:'Item 20'
-                        }
-                    ]
-                },
-                {
-                    optionItem:'My Career and Benefits',
-                    items: [
-                        {
-                            title:'Item 1'
-                        },
-                        {
-                            title:'Item 2'
-                        },
-                        {
-                            title:'Item 3'
-                        },
-                        {
-                            title:'Item 4'
-                        },
-                        {
-                            title:'Item 5'
-                        },
-                        {
-                            title:'Item 6'
-                        }
-                    ]
-                },
-                {
-                    optionItem: 'Traven and Expense',
-                    items: [
-                        {
-                            title:'Item 1'
-                        },
-                        {
-                            title:'Item 2'
-                        },
-                        {
-                            title:'Item 3'
-                        },
-                        {
-                            title:'Item 4'
-                        },
-                        {
-                            title:'Item 5'
-                        },
-                        {
-                            title:'Item 6'
-                        }
-                    ]
-                },
-                {
-                    optionItem: 'Traven and Expense',
-                    items: [
-                        {
-                            title:'Item 1'
-                        },
-                        {
-                            title:'Item 2'
-                        },
-                        {
-                            title:'Item 3'
-                        },
-                        {
-                            title:'Item 4'
-                        },
-                        {
-                            title:'Item 5'
-                        },
-                        {
-                            title:'Item 6'
-                        }
-                    ]
-                }
-            ]
-        },
-       
-    ]
+    localStorage.setItem('Dummy Data', JSON.stringify(Dummy))
     const handleItemClick =  (selectedItem: number) => {
         setSelectItem(selectedItem)
     }
@@ -331,16 +35,18 @@ const Navbar: React.FC<props> = ({data}) => {
                 <DropdownMenu>  
                     <BlockOne>
                         {
-                            subMenu.map((item, index) => (
-                                 <SubMenu onClick={() => handleItemClick(index)} key={index}>
+                            Dummy.map((item, index) => (
+                                <SubMenu onClick={() => handleItemClick(index)} key={index}>
+                                    <>
                                     {item.label}
+                                    </>
                                 </SubMenu>
                             ))
                         }
                     </BlockOne>
                     <BlockTwo>
                         {
-                            subMenu.map((item, index) => (
+                            Dummy.map((item, index) => (
                                 selectItem === index && (
                                     <ItemBlock key={index} >
                                     {item.items.map((item, index) => (
@@ -348,19 +54,28 @@ const Navbar: React.FC<props> = ({data}) => {
                                          <div> {item.optionItem}</div>
                                             <div>
                                                 {item?.items.map((item, index) => (
-                                                    <div style={{padding:10}}>{item.title}</div>
+                                                    <div style={{ padding: 10 }} key={index}>
+                                                        <Link to={item.title} style={{textDecoration:"none",color:"#222"}}>{item.title}</Link>
+                                                    </div>
                                                 ))}
                                             </div>
                                      </Items>
                                     ))}
-                                    <Items>{localStorage.getItem('saveData')}</Items>
                                  </ItemBlock>
                                     )
                              ))
                         }
-
+                        <ItemBlock>
+                            {data.map((item, index) => (
+                                <Items key={index}>
+                                    <div style={{ padding: 10 }} key={index}>
+                                        <Link to={item.title} style={{textDecoration:"none",color:"#222"}}>{item.title}</Link>
+                                    </div>
+                                </Items>
+                            ))}
+                        </ItemBlock>
                     </BlockTwo>
-                    
+                   
                 </DropdownMenu>
             ) : null}
         </Container>
